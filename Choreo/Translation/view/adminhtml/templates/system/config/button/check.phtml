@@ -1,0 +1,40 @@
+<?php
+/*************************************************************************
+ *
+ * Choreo, Inc CONFIDENTIAL
+ * __________________
+ *
+ *  2020 - Choreo, Inc Incorporated
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Choreo, LLC.
+ * The intellectual and technical concepts contained herein are
+ * proprietary to Choreo, LLC and may be covered by
+ * U.S. and Foreign Patents, patents in process, and are protected
+ * by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Choreo, LLC.
+ *
+ *************************************************************************/
+ ?>
+
+<div class="pp-buttons-container">
+    <button id="<?php echo $block->getHtmlId() ?>" onclick="return false;">
+        <span><span><span><?php echo $block->escapeHtml($block->getButtonLabel()); ?></span></span></span>
+    </button>
+</div>
+<script type="text/javascript">
+    require([
+        "jquery",
+		"chtranslation"
+	], function($,chtranslation){
+            var params = {internUrl:"<?php echo $block->getInternUrl() ?>",  apiKeyUrl: "#<?php echo $block->getApiKeyUrl() ?>",  apiKeyId: "#<?php echo $block->getApiKeyId() ?>", htmlId: "#<?php echo $block->getHtmlId() ?>", loadConfigUrl: "<?php echo $block->getLoadConfigUrl() ?>"};  
+            $("#<?php echo $block->getHtmlId() ?>").on( "click", function() {
+				console.log("tgtgtddd");
+				console.log(params);
+				var checkactivation = chtranslation.ChtranslationForm.checkactivation(params);
+            });
+	});
+</script>

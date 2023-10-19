@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/*************************************************************************
+ *
+ * Choreo, Inc CONFIDENTIAL
+ * __________________
+ *
+ *  2020 - Choreo, Inc Incorporated
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Choreo, LLC.
+ * The intellectual and technical concepts contained herein are
+ * proprietary to Choreo, LLC and may be covered by
+ * U.S. and Foreign Patents, patents in process, and are protected
+ * by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Choreo, LLC.
+ *
+ *************************************************************************/
+-->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Ui/etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">choreo_translation_jobs.choreo_translation_listing_source</item>
+            <item name="deps" xsi:type="string">choreo_translation_jobs.choreo_translation_listing_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">choreo_translation_jobs_columns</item>
+        <item name="buttons" xsi:type="array">            
+            <item name="refresh" xsi:type="array">
+                <item name="name" xsi:type="string">refresh</item>
+                <item name="label" xsi:type="string" translate="true">Refresh</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/refresh</item>
+            </item>
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Add New Job</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">*/*/new</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="choreo_translation_listing_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+            <argument name="name" xsi:type="string">choreo_translation_listing_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <container name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">ui/grid/toolbar</item>
+            </item>
+        </argument>
+		<bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsProvider" xsi:type="string">choreo_translation_jobs.choreo_translation_jobs.choreo_translation_jobs_columns</item>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">choreo_translation_jobs.choreo_translation_jobs.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.filters</item>
+                    </item>
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                    <item name="childDefaults" xsi:type="array">
+                        <item name="provider" xsi:type="string">choreo_translation_jobs.choreo_translation_jobs.listing_top.listing_filters</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">choreo_translation_jobs.choreo_translation_jobs.choreo_translation_jobs_columns.${ $.index }:visible</item>
+                        </item>
+                    </item>
+                </item>
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+        </filters>        
+        <paging name="listing_paging">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="provider" xsi:type="string">choreo_translation_jobs.choreo_translation_jobs.listing_top.bookmarks</item>
+                        <item name="namespace" xsi:type="string">current.paging</item>
+                    </item>
+                    <item name="selectProvider" xsi:type="string">choreo_translation_jobs.choreo_translation_jobs.choreo_translation_jobs_columns.ids</item>
+                    <item name="displayArea" xsi:type="string">bottom</item>
+                </item>
+            </argument>
+        </paging>
+    </container>
+    <columns name="choreo_translation_jobs_columns">
+        <selectionsColumn name="ids">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">id</item>
+                    <item name="sortOrder" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </selectionsColumn>                       
+        <column name="job_number">
+           <argument name="data" xsi:type="array">
+               <item name="config" xsi:type="array">
+                   <item name="sortOrder" xsi:type="number">10</item>
+                   <item name="filter" xsi:type="string">text</item>
+                   <item name="label" xsi:type="string" translate="true">Job Number</item>
+               </item>
+           </argument>
+        </column>        
+        <column name="translationjobname">
+           <argument name="data" xsi:type="array">
+               <item name="config" xsi:type="array">
+                   <item name="sortOrder" xsi:type="number">30</item>
+                   <item name="filter" xsi:type="string">text</item>
+                   <item name="label" xsi:type="string" translate="true">Job Name</item>
+               </item>
+           </argument>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="label" xsi:type="string" translate="true">Created At</item>
+                </item>
+            </argument>
+        </column>
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="sorting" xsi:type="string">desc</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="label" xsi:type="string" translate="true">Updated At</item>
+                </item>
+            </argument>
+        </column> 
+        <column name="sourcestore" class="Choreo\Translation\Ui\Component\Listing\Column\Storeview">
+           <argument name="data" xsi:type="array">
+               <item name="config" xsi:type="array">
+                   <item name="sortOrder" xsi:type="number">60</item>
+                   <item name="filter" xsi:type="string">text</item>
+                   <item name="label" xsi:type="string" translate="true">Store View</item>
+               </item>
+           </argument>
+        </column>
+        <column name="sourcelanguage" class="Choreo\Translation\Ui\Component\Listing\Column\Sourcelang">
+           <argument name="data" xsi:type="array">
+               <item name="config" xsi:type="array">
+                   <item name="sortOrder" xsi:type="number">70</item>
+                   <item name="filter" xsi:type="string">text</item>
+                   <item name="label" xsi:type="string" translate="true">Source Language</item>
+               </item>
+           </argument>
+        </column>
+        <column name="targetlanguage" class="Choreo\Translation\Ui\Component\Listing\Column\Targetlang">
+           <argument name="data" xsi:type="array">
+               <item name="config" xsi:type="array">
+                   <item name="sortOrder" xsi:type="number">80</item>
+                   <item name="filter" xsi:type="string">text</item>
+                   <item name="label" xsi:type="string" translate="true">Target Language</item>
+               </item>
+           </argument>
+        </column>               		
+    <column name="status">
+           <argument name="data" xsi:type="array">
+               <item name="config" xsi:type="array">
+             <item name="sortOrder" xsi:type="number">90</item>
+                   <item name="filter" xsi:type="string">text</item>
+                   <item name="label" xsi:type="string" translate="true">Status</item>
+               </item>
+           </argument>
+    </column>      	
+		<actionsColumn name="actions" class="Choreo\Translation\Ui\Component\Listing\Column\JobsActions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+				    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="indexField" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </actionsColumn>
+    </columns>
+</listing>

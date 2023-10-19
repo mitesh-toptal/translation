@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/*************************************************************************
+ *
+ * Choreo, Inc CONFIDENTIAL
+ * __________________
+ *
+ *  2020 - Choreo, Inc Incorporated
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Choreo, LLC.
+ * The intellectual and technical concepts contained herein are
+ * proprietary to Choreo, LLC and may be covered by
+ * U.S. and Foreign Patents, patents in process, and are protected
+ * by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Choreo, LLC.
+ *
+ *************************************************************************/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="choreo_grid_data_source" xsi:type="string">Choreo\Translation\Model\ResourceModel\Jobs\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Choreo\Translation\Model\ResourceModel\Jobs\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">choreo_translation_jobs</argument>
+            <argument name="eventPrefix" xsi:type="string">choreo_translation_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">choreo_translation_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Choreo\Translation\Model\ResourceModel\Jobs</argument>
+        </arguments>
+    </type>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="choreo_translation_listing_source" xsi:type="string">Choreo\Translation\Model\ResourceModel\Jobs\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="JobsGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Choreo\Translation\Model\ResourceModel\Jobs\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">JobsGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="JobsGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>

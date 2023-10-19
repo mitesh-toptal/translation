@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<!--
+/*************************************************************************
+ *
+ * Choreo, Inc CONFIDENTIAL
+ * __________________
+ *
+ *  2020 - Choreo, Inc Incorporated
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Choreo, LLC.
+ * The intellectual and technical concepts contained herein are
+ * proprietary to Choreo, LLC and may be covered by
+ * U.S. and Foreign Patents, patents in process, and are protected
+ * by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Choreo, LLC.
+ *
+ *************************************************************************/
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="translation" translate="label" sortOrder="40">
+            <label><![CDATA[Lilt Translation]]></label>
+        </tab>
+        <section id="choreotranslation" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Account</label>
+            <tab>translation</tab>
+            <resource>Choreo_Translation::choreo_translation</resource>
+            <group id="activation" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Translator Activation</label>
+				 <field id="activationkey" translate="label comment" type="text" sortOrder="10"  showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Activation Key</label>
+                </field>
+				<field id="check" translate="button_label"  sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label/>
+                    <attribute type="api_key_id">choreotranslation_activation_activationkey</attribute> 
+                    <attribute type="api_key_url">choreotranslation_activation_apiendpoint</attribute>
+                    <attribute type="load_config_url"><![CDATA[choreo_translation/index/activation]]></attribute>
+                    <button_label><![CDATA[Validate]]></button_label>
+                    <button_url>
+                        <![CDATA[choreo_translation/index/activation]]>
+                    </button_url>
+                    <frontend_model>Choreo\Translation\Block\System\Config\Button\Check</frontend_model>
+                    <comment><!--<![CDATA[Once you check you API access, please click Save Setting for begin use extension.]]>--></comment>
+                </field>				
+            </group>
+            <group id="configurable_cron" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Cron Settings</label>
+                <field id="frequency" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Translation API Polling Frequency</label>
+                    <source_model>Magento\Cron\Model\Config\Source\Frequency</source_model>
+                    <backend_model>Choreo\Translation\Model\Config\CronConfig</backend_model>
+                </field>
+                <field id="time" translate="label comment" sortOrder="2" type="time" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Start Time</label>
+                </field>
+            </group>
+
+		</section>
+		<section id="ch_attributes" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Default Attributes</label>
+            <tab>translation</tab>
+            <resource>Choreo_Translation::choreo_translation</resource>
+            <group id="attributes" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+			    <label>Select Attributes To Translate</label>				
+				<field id="productattributes" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Attributes</label>
+                    <source_model>Choreo\Translation\Model\Config\Source\Productattribute</source_model>
+					<depends>
+                        <field id="activation">1</field>
+                    </depends>
+                </field>
+				<field id="categoryfields" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Category Attributes</label>
+                    <source_model>Choreo\Translation\Model\Config\Source\Categoryoption</source_model>
+					<depends>
+                        <field id="activation">1</field>
+                    </depends>
+                </field>
+                <field id="cmspagefields" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Page Attributes</label>
+                    <source_model>Choreo\Translation\Model\Config\Source\Cmsoption</source_model>
+                    <depends>
+                        <field id="activation">1</field>
+                    </depends>
+                </field>
+                <field id="cmsblockfields" translate="label" type="multiselect" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>CMS Block Attributes</label>
+                    <source_model>Choreo\Translation\Model\Config\Source\Blockoption</source_model>
+                    <depends>
+                        <field id="activation">1</field>
+                    </depends>
+                </field>
+			</group>
+        </section>		
+    </system>
+</config>

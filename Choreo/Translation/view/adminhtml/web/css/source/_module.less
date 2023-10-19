@@ -1,0 +1,120 @@
+.preview-form {
+	.horizontal-bar a.primary {
+		background-color: #eb5202;
+	    border-color: #eb5202;
+	    color: #ffffff;
+	    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+	    letter-spacing: .025em;
+	    padding-bottom: 0.6875em;
+	    padding-top: 0.6875em;
+	    padding: 12px 16px;
+	    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	    line-height: 21px;
+	    font-size: 16px;
+	    font-weight: 600;
+	}
+	.table-content-section {
+		> table {
+			width: 100%;
+		    max-width: 100%;
+		    display: block;
+	        border: 1px solid #e6e6e6;
+			> tbody,
+			> thead {
+			    display: block;
+			    > tr {
+			    	display: flex;
+		    	    flex-wrap: wrap;
+	    	        &.odd {
+		        	    background: #f5f5f5;
+	    	        }
+		    	    > td,
+		    	    > th {
+		    	    	width: 50%;
+		    		    padding: 20px;
+	    		        word-break: break-word;
+		    		    &:last-child {
+	    		    	    border-left: 1px solid #e6e6e6;
+		    		    }
+		    	    }
+		    	    > th {
+					    font-size: 20px;
+					}
+			    }
+			}
+			.info-section {
+			    width: 100%;
+			    display: flex;
+			    flex-wrap: wrap;
+			    margin-bottom: 20px;
+			    margin-top: 0;
+			    font-weight: 600;
+			    .attribute {
+				    margin: 0 50px;
+				}
+				.view-link {
+				    margin-left: auto;
+				    margin-right: 50px;
+				    a {
+				    	text-decoration: underline;
+				    }
+				}
+			}
+		}
+	}
+
+	tbody,
+	thead {
+	   	tr {
+    	    td,
+    	    th {
+		        word-break: break-word;
+	        }
+        }
+    }
+}
+
+.choreo_translation-jobs-edit {
+	.customer-information {
+	    max-width: 600px;
+	    background: #ebebeb;
+	    padding: 10px 20px 20px;
+	    border-radius: 15px;
+	    border: 1px solid #676667;
+	    .fieldset-wrapper-title {
+    	    border-color: #dcdcdc!important;
+	    }
+	    th,
+	    td {
+    	    background: #ebebeb!important;
+			padding-left: 0;
+		    font-weight: 600;
+    		color: #000;
+	    }
+	    th {
+		    width: 30%;
+		    white-space: nowrap;
+		}
+	}
+}
+button#choreotranslation_activation_check {
+    float: left;
+    margin-right: 15px;
+}
+p.choreo_check_icon {
+    font-size: 15px;
+    float: left;
+    padding: 5px 8px;
+    background: green;
+    border-radius: 75%;
+    color: #fff;
+    margin: 1px 10px 0 0;
+
+	 width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.preview-form .table-content-section > table .attribute-section * {
+    display: block!important;
+}

@@ -1,0 +1,46 @@
+<?php 
+/*************************************************************************
+ *
+ * Choreo, Inc CONFIDENTIAL
+ * __________________
+ *
+ *  2020 - Choreo, Inc Incorporated
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Choreo, LLC.
+ * The intellectual and technical concepts contained herein are
+ * proprietary to Choreo, LLC and may be covered by
+ * U.S. and Foreign Patents, patents in process, and are protected
+ * by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Choreo, LLC.
+ *
+ *************************************************************************/
+ ?>
+<div class="fieldset-wrapper customer-information">
+    <div class="fieldset-wrapper-title">
+        <span class="title"><?php echo __('Summary') ?></span>
+    </div>
+    <table id="dynamic-table-val" class="admin__table-secondary">
+        <tbody>
+        <tr>
+            <th><?php echo __('Products:') ?></th>                         
+            <td class="products-count"><?= __("") ?></td>
+        </tr>
+        <tr>
+            <th><?php echo __('Categories:') ?></th>                        
+            <td class="category-count"><?= __("") ?></td>
+        </tr>
+        <tr>
+            <th><?php echo __('Pages:') ?></th>            
+            <td class="pages-count"><?= __("") ?></td>
+        </tr>
+        <tr>
+            <th><?php echo __('Blocks:') ?></th>            
+            <td class="blocks-count"><?= __("") ?></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

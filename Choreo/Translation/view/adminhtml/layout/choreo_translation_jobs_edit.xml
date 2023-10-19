@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+/*************************************************************************
+ *
+ * Choreo, Inc CONFIDENTIAL
+ * __________________
+ *
+ *  2020 - Choreo, Inc Incorporated
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Choreo, LLC.
+ * The intellectual and technical concepts contained herein are
+ * proprietary to Choreo, LLC and may be covered by
+ * U.S. and Foreign Patents, patents in process, and are protected
+ * by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Choreo, LLC.
+ *
+ *************************************************************************/
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <block class="Choreo\Translation\Block\Adminhtml\Jobs\Edit\Tabs" name="choreo_translation_jobs_edit_tabs">
+                <block class="Choreo\Translation\Block\Adminhtml\Jobs\Edit\Tab\Main" name="choreo_translation_jobs_edit_tab_main"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">choreo_translation_jobs_edit_tab_main</argument>
+                </action>
+				<action method="addTab">
+                    <argument name="name" xsi:type="string">attachment_products</argument>
+                    <argument name="block" xsi:type="array">
+                        <item name="label" xsi:type="string">2. Select Products</item>
+                        <item name="title" xsi:type="string">2. Select Products</item>
+                        <item name="url" xsi:type="helper" helper="Choreo\Translation\Helper\Data::getProductsGridUrl"></item>
+                        <item name="class" xsi:type="string">ajax</item>
+                    </argument>
+                </action>
+				<block class="Choreo\Translation\Block\Adminhtml\Jobs\Edit\Tab\Categories" name="tab_categories" template="Choreo_Translation::jobs/categoryTree.phtml"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">categories</argument>
+                    <argument name="block" xsi:type="string">tab_categories</argument>
+                </action>
+				<action method="addTab">
+                    <argument name="name" xsi:type="string">cms_pages</argument>
+                    <argument name="block" xsi:type="array">
+                        <item name="label" xsi:type="string">4. Select Pages</item>
+                        <item name="title" xsi:type="string">Translate Pages</item>
+                        <item name="url" xsi:type="helper" helper="Choreo\Translation\Helper\Data::getPagesUrl"/>
+                         <item name="class" xsi:type="string">ajax</item>
+                    </argument>
+                </action>
+				<action method="addTab">
+                    <argument name="name" xsi:type="string">cms_blocks</argument>
+                    <argument name="block" xsi:type="array">
+                        <item name="label" xsi:type="string">5. Select Blocks</item>
+                        <item name="title" xsi:type="string">Translate Blocks</item>
+                        <item name="url" xsi:type="helper" helper="Choreo\Translation\Helper\Data::getBlockUrl"/>
+                        <item name="class" xsi:type="string">ajax</item>
+                    </argument>
+                </action>
+                <block class="Choreo\Translation\Block\Adminhtml\Jobs\Edit\Tab\Summary" name="tab_summery" />
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">summery_section</argument>
+                    <argument name="block" xsi:type="string">tab_summery</argument>
+                </action>                
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Choreo\Translation\Block\Adminhtml\Jobs\Edit" name="choreo_translation_jobs_edit"/>
+        </referenceContainer>
+    </body>
+</page>

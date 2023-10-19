@@ -1,0 +1,89 @@
+<?php 
+/*************************************************************************
+ *
+ * Choreo, Inc CONFIDENTIAL
+ * __________________
+ *
+ *  2020 - Choreo, Inc Incorporated
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Choreo, LLC.
+ * The intellectual and technical concepts contained herein are
+ * proprietary to Choreo, LLC and may be covered by
+ * U.S. and Foreign Patents, patents in process, and are protected
+ * by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Choreo, LLC.
+ *
+ *************************************************************************/
+?>
+<?php $jobData = $this->getJobData(); ?>
+<?php //echo "<pre>"; print_r($jobData); exit;?>
+
+<div class="preview-form">
+	<div class="page-main-actions">
+		<div class="horizontal-bar page-actions floating-header">
+			<a href="<?php echo $this->applyTranslationUrl() ?>" class="action- scalable primary">
+				<?=__("Apply Translation")?>				
+			</a>
+		</div>
+	</div>
+	<div class="table-content-section">
+		<table style="width:100%">
+			<thead>
+				<tr>
+				  	<th><strong><?=$this->getLanguageName($jobData['source-language'])?></strong></th>
+				  	<th><strong><?=$this->getLanguageName($jobData['target-language'])?></strong></th>
+				</tr>				
+			</thead>
+		<?php
+		if (!empty($jobData) && isset($jobData['data']) && !empty($jobData['data'])) { ?>
+			<tbody>
+			<?php $counter = 1; ?>		
+		    <?php foreach ($jobData['data'] as $key => $value) {?>		    		    
+		    	<?php $previewArray = array(); ?>		    	
+		    	<?php foreach ($value['source_attr'] as $key1 => $value1) {		    		
+		    		$previewArray[$key1]['source'] = $value1;
+		    	} ?>
+		    	<?php foreach ($value['target_attr'] as $key2 => $value2) {
+		    		$previewArray[$key2]['target'] = $value2;
+		    	} ?>		    	
+		    <?php foreach($previewArray as $attribName => $attribValue){ ?>	
+		    	<?php 
+		    		/*$translationStatus = "Not Translated";
+		    		if(md5($attribValue['source']) != md5($attribValue['target'])){
+		    			$translationStatus = "Translated";
+		    		}*/
+		    	?>
+		    	<tr class="<?= $counter % 2 ? "even" : "odd" ?>">			  	
+			  	<td>
+			    	<div class="info-section">
+			    		<div class="type"><?= __("Type: ")?><?=$value['type']?></div>
+			    		<div class="attribute"><?= __("Attribute: ")?><?= $attribName ?></div>			    					    		
+			    	</div>
+			    	<div class="attribute-section">
+			    	<?php if(is_array($attribValue['source'])){ print_r($attribValue['source']); }else{ echo $attribValue['source']; }  ?>
+			    	</div>
+			    </td>
+			  	<td>
+			  		<div class="info-section">
+			    		<div class="type"><?= __("Type: ")?><?=$value['type']?></div>
+			    		<div class="attribute"><?= __("Attribute: ")?><?= $attribName ?></div>
+			    		<?php /* ?><div class="view"><?= __("Status: ")?><?= $translationStatus ?></div><?php */ ?>
+			    	</div>
+			    	<div class="attribute-section">
+			    	<?php if(is_array($attribValue['target'])){ print_r($attribValue['target']); }else{ echo $attribValue['target']; }  ?>
+			    	</div>
+			  	</td>			  	
+			  </tr>	
+			  <?php $counter++; ?>
+		    <?php } ?>			  			  			  	    
+		<?php } ?>
+		</tbody>
+		<?php }
+		?>
+		</table>
+	</div>
+</div>

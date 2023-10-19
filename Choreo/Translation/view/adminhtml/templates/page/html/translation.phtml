@@ -1,0 +1,140 @@
+<?php 
+/*************************************************************************
+ *
+ * Choreo, Inc CONFIDENTIAL
+ * __________________
+ *
+ *  2020 - Choreo, Inc Incorporated
+ *  All Rights Reserved.
+ *
+ * NOTICE:  All information contained herein is, and remains
+ * the property of Choreo, LLC.
+ * The intellectual and technical concepts contained herein are
+ * proprietary to Choreo, LLC and may be covered by
+ * U.S. and Foreign Patents, patents in process, and are protected
+ * by trade secret or copyright law.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from Choreo, LLC.
+ *
+ *************************************************************************/
+
+$configdata = $block->getConfigvalues();
+$pageid = $block->getPageid();
+?>
+<script type="text/javascript">
+    require([
+        "jquery",
+		"chtranslation",
+		"ko",
+		"uiRegistry",
+		"domReady!"
+    ], function($,chtranslation,ko){
+	    $(window).ready(function() {
+		    var pageid = '<?php echo $pageid; ?>';
+			if(pageid != 'adminhtml_system_config_edit' && pageid != 'choreo_translation_jobs_edit'){
+		        $(".page-wrapper").after('<div id="chtranslation-translator" class="chtranslation_translator" style="display: none;"><div id="admin-popup-overlay"><div class="left"><h3 id="original-lang">Auto Detection</h3><textarea readonly="true" class="textarea admin__control-textarea old-text" id="old-text"></textarea></div><div class="right"><h3 id="translation-lang">Hindi</h3><textarea class="textarea admin__control-textarea translated-textarea" id="translated-textarea" ></textarea></div></div></div>');
+		        setTimeout(function() {
+                    var translator = chtranslation.ChtranslationForm.init('edit_form', <?php echo $configdata ?>);
+		        }, 5000);
+			    $(document).on('click', '.fieldset-wrapper', function() {
+                    function customTranslate() {
+                        var translator = chtranslation.ChtranslationForm.init('edit_form', <?php echo $configdata ?>);
+                    }
+                    setTimeout(customTranslate, 1000);
+                });
+			}else{
+				var currentTab = $(".ui-tabs-active a").attr("id");
+				if(currentTab == 'choreo_translation_jobs_edit_tabs_summery_section'){
+					$(".save-button").show();
+					$(".next-button").hide();
+				}else{
+					$(".save-button").hide();
+					$(".next-button").show();	
+				}
+				
+				$(document).on('click', '.ui-tabs-nav li', function() {										
+					var currentTab = $(".ui-tabs-active a").attr("id");
+					if(currentTab == 'choreo_translation_jobs_edit_tabs_summery_section'){						
+						$(".save-button").show();
+						$(".next-button").hide();
+
+						var e = $.Event( "keypress", { which: 13 } );						
+						$("#productsGrid_page-current").trigger(e);
+
+						var productCount = 0;
+						setTimeout(function(){
+							$.ajax({		                    
+			                    url: '<?php echo $block->getProductCountUrl(); ?>',
+			                    type: "GET",		                    
+			                }).done(function (data) {		                	
+			                	productCount = data.count;		                    		                	
+			                });
+		                 }, 1000);	
+
+		                setTimeout(function(){
+		                	if(productCount == 0){
+		                		productCount = "";
+		                	}
+							$("#dynamic-table-val .products-count").html(productCount);
+						 }, 2000);	
+						
+						var categoryCount = 0;
+						var pageCount = 0;
+						var blockCount = 0;
+							
+
+						$("#tree-div input:checked").each(function() {
+							categoryCount++;
+						});
+
+						if(categoryCount == 0){
+	                		categoryCount = "";
+	                	}
+
+						pageCount = $("#pagesGrid_massaction-count strong").html();
+						blockCount = $("#blocksGrid_massaction-count strong").html();		
+
+						if(pageCount == 0){
+	                		pageCount = "";
+	                	}
+
+	                	if(blockCount == 0){
+	                		blockCount = "";
+	                	}			
+						
+						$("#dynamic-table-val .category-count").html(categoryCount);
+						$("#dynamic-table-val .pages-count").html(pageCount);
+						$("#dynamic-table-val .blocks-count").html(blockCount);
+					}else{
+						$(".save-button").hide();
+						$(".next-button").show();	
+					}					
+				});
+				
+
+				$(document).on('click', '#next', function() {					
+					var currentTab = $(".ui-tabs-active a").attr("id");					
+					if(currentTab == "choreo_translation_jobs_edit_tabs_main_section"){
+						$('.ui-corner-all li:nth-child(2) a').click();
+					}
+					if(currentTab == "choreo_translation_jobs_edit_tabs_attachment_products"){
+						$('.ui-corner-all li:nth-child(3) a').click();
+					}
+					if(currentTab == "choreo_translation_jobs_edit_tabs_categories"){
+						$('.ui-corner-all li:nth-child(4) a').click();
+					}
+					if(currentTab == "choreo_translation_jobs_edit_tabs_cms_pages"){
+						$('.ui-corner-all li:nth-child(5) a').click();
+					}
+					if(currentTab == "choreo_translation_jobs_edit_tabs_cms_blocks"){
+						$('.ui-corner-all li:nth-child(6) a').click();
+						$(".save-button").show();
+						$(".next-button").hide();						
+					}									
+				});	
+			    var translator = chtranslation.ChtranslationForm.targetlanglist(<?php echo $configdata ?>);
+			}
+		});
+    });
+</script>
